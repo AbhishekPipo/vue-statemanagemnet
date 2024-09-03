@@ -1,11 +1,12 @@
 <template>
     <div>
+    <h1>Counter  component</h1>
         <div class="">
-        {{ $store.state.count }}
+        {{ count }}
         </div>
         <div class="">
-            <button @click.prevent="onIncreament()" style="margin-right: 10px;" >+</button>
-            <button @click.prevent="onDecreament()" >-</button>  
+            <button @click.prevent="onIncreament()" style="margin-right: 10px;" >increment in counter componenet</button>
+            <button @click.prevent="onDecreament()" >decreament in counter componenet</button>  
         </div>
     </div>
 </template>
@@ -18,12 +19,31 @@ export default {
           
         }
     },
+    computed:{
+     count(){
+        return  this.$store.state.count;
+        // return this.$store.getters.getDoneList();
+     }
+    },
     methods:{
         onIncreament(){
-            this.$store.state.count++;
+            // this.$store.state.count++;
+            // this.$store.commit('increment',1); // Using commit to commit the action to the store
+this.$store.commit({
+    type:'increment',
+    value: 1
+})
+            
         },
         onDecreament(){
-            this.$store.state.count--;
+            // this.$store.commit('decrement',1); // Using commit to commit the action to the store
+            // this.$store.state.count--;
+
+            this.$store.commit({
+                type:'decrement',
+                value: 1
+            })
+
         }
     }
 }
